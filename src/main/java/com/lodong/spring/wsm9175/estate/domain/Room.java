@@ -29,12 +29,13 @@ public class Room {
     private String floor;
     private String frontMemo;
     private String memo;
-    private String option;
+    private String roomOption;
     private String realDeposit;
     private String realRent;
     private String rent;
     private String roomType;
     private LocalDateTime createAt;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "main_image_path")
     private RoomImage roomImage;

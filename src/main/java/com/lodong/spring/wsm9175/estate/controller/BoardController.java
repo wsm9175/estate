@@ -6,7 +6,6 @@ import com.lodong.spring.wsm9175.estate.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +19,6 @@ import static com.lodong.spring.wsm9175.estate.util.MakeResponseEntity.getRespon
 
 public class BoardController {
     private final BoardService boardService;
-
     public BoardController(BoardService boardService) {
         this.boardService = boardService;
     }
@@ -35,5 +33,4 @@ public class BoardController {
             return getResponseMessage(StatusEnum.BAD_REQUEST, nullPointerException.getMessage());
         }
     }
-
 }

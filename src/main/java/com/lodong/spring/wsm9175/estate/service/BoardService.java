@@ -21,7 +21,7 @@ import java.util.Optional;
 @Transactional
 
 public class BoardService {
-    private final String mainFileDownloadUrl = "http://210.99.223.38:13405/rest/v1/estate/file/main/";
+    //private final String mainFileDownloadUrl = "http://210.99.223.38:13405/rest/v1/estate/file/main/";
     private final String roomFileDownloadUrl = "http://210.99.223.38:13405/rest/v1/estate/file/room/";
     private final RoomRepository roomRepository;
 
@@ -33,12 +33,11 @@ public class BoardService {
         for(Room room : roomList){
             List<RoomImage> roomImageList = Optional.ofNullable(room.getRoomImageList()).orElseGet(Collections::emptyList);
             List<String> roomImageNameList = roomImageList.stream().map(roomImage -> roomFileDownloadUrl+roomImage.getName()).toList();
-            BoardDTO boardDTO = new BoardDTO(room.getAddress(), room.getAddressThai(), room.getContact(), room.getContract(),
+            BoardDTO boardDTO = new BoardDTO(room.getId(),room.getAddress(), room.getAddressThai(), room.getContact(), room.getContract(),
                     room.getDate(), room.getDeposit(), room.getElevator(), room.getFloor(), room.getFrontMemo(),
-                    mainFileDownloadUrl+Optional.ofNullable(room.getRoomImage().getName()).orElse(""), room.getMemo(), room.getOption(), roomImageNameList ,room.getRealDeposit(), room.getRealRent(), room.getRent(), room.getRoomType());
+                    roomFileDownloadUrl+Optional.ofNullable(room.getRoomImage().getName()).orElse(""), room.getMemo(), room.getRoomOption(), roomImageNameList ,room.getRealDeposit(), room.getRealRent(), room.getRent(), room.getRoomType());
             boardDTOS.add(boardDTO);
         }
-
         return boardDTOS;
     }
 }

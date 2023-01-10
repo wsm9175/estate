@@ -59,23 +59,11 @@ public class FileController {
             header.add("Content-type", Files.probeContentType(file.toPath()));
             result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
             return result;
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             StatusEnum statusEnum = StatusEnum.BAD_REQUEST;
             String message = "해당 파일이 존재하지 않습니다.";
             return getResponseMessage(statusEnum, message);
-        }
-    }
-
-    private void copyInputStreamToFile(InputStream inputStream, File file) throws IOException {
-
-        try (FileOutputStream outputStream = new FileOutputStream(file)) {
-            int read;
-            byte[] bytes = new byte[1024];
-
-            while ((read = inputStream.read(bytes)) != -1) {
-                outputStream.write(bytes, 0, read);
-            }
         }
     }
 
